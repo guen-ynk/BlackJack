@@ -1,9 +1,10 @@
-/**
+/*
  * @Author Guen Yanik 2020
  * @Blackjack Klasse fuer Blackjack Game in Java
  *
  */
 
+import java.nio.charset.IllegalCharsetNameException;
 import java.util.*;
 
 /**
@@ -53,12 +54,13 @@ class BlackJack {
 
             }
             while (this.player.count != -1 && this.dealer.count < 17) {
-                this.dealer.hand.add(this.cards.remove(0));
-                this.dealer.count = +this.dealer.hand.get(this.dealer.hand.size() - 1);
+                int x = this.cards.remove(0);
+                this.dealer.hand.add(x);
+                this.dealer.count += x;
             }
             System.out.println(this.player.hand.toString() + this.player.count + "\n" + this.dealer.hand.toString() + this.dealer.count);
 
-            if (this.player.count < this.dealer.count) {
+            if (this.player.count < this.dealer.count && this.dealer.count < 22) {
                 System.out.println("Dealer wins");
                 if (this.player.money == 0) ingame = false;
             } else if (this.player.count == this.dealer.count) {
